@@ -1,0 +1,38 @@
+﻿@page
+@model WebApplication3.Pages.DeleteModel
+@{
+    ViewData["Title"] = "Delete";
+}
+<h3>Usuń</h3>
+
+<h4>Czy na pewno chcesz usunąć ten produkt?</h4>
+<div>
+    
+    <hr />
+    <h5>Produkt:</h5>
+    <dl class="row">
+        @{
+            string id = Request.Query["id"].ToString();
+            Model.ID = Convert.ToInt32(id);
+            int point = Model.productList.FindIndex(p=>p.id==Model.ID); 
+        }
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Product.name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model =>Model.productList[point].name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Product.price)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model =>Model.productList[point].price)
+        </dd>
+    </dl>
+    
+    <form method="post">
+        <input type="hidden" asp-for="Product.id" />
+        <input type="submit" value="Usuń" class="btn btn-danger" /> |
+        <a asp-page="List">Wróć do listy</a>
+    </form>
+</div>

@@ -1,0 +1,30 @@
+﻿@page
+@model WebApplication3.Pages.CategoryAddModel
+@{
+}
+<h2>Nowa Kategoria</h2>
+ <br /><br />
+    <div class="container">
+        <form class="form-horizontal" method="post">
+            <div class="form-group">
+                <label asp-for="newCategory.shortName" class="control-label col-sm2"></label>
+            <div class="col-sm-6">
+                <input asp-for="newCategory.shortName" class="form-control">
+                <span asp-validation-for="newCategory.shortName" class="text-danger"></span>
+            </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="newCategory.longName" class="control-label col-sm2"></label>
+            <div class="col-sm-6">
+                <input asp-for="newCategory.longName" class="form-control">
+                <span asp-validation-for="newCategory.longName" class="text-danger"></span>
+            </div>
+            </div>
+            <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button class="btn btn btn-primary">Zatwierdź</button>
+            </div>
+            </div>
+        </form>
+    </div>
+

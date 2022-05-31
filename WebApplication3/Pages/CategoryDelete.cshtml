@@ -1,0 +1,37 @@
+﻿@page
+@model WebApplication3.Pages.CategoryDeleteModel
+@{
+}
+<h3>Usuń</h3>
+
+<h4>Czy na pewno chcesz usunąć te kategorie?</h4>
+<div>
+    
+    <hr />
+    <h5>Kategoria:</h5>
+    <dl class="row">
+        @{
+            string id = Request.Query["id"].ToString();
+            Model.ID = Convert.ToInt32(id);
+            int point = Model.categoryList.FindIndex(p=>p.id==Model.ID); 
+        }
+        <!---<dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Category.shortName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model =>Model.categoryList[point].shortName)
+        </dd>--->
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Category.longName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model =>Model.categoryList[point].longName)
+        </dd>
+    </dl>
+    
+    <form method="post">
+        <input type="hidden" asp-for="Category.id" />
+        <input type="submit" value="Usuń" class="btn btn-danger" /> |
+        <a asp-page="CategoryList">Wróć do listy</a>
+    </form>
+</div>

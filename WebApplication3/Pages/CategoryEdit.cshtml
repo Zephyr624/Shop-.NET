@@ -1,0 +1,37 @@
+﻿@page
+@model WebApplication3.Pages.CategoryEditModel
+@{
+}
+@{
+                string id = Request.Query["id"].ToString();
+                Model.ID = Convert.ToInt32(id);
+                int point = Model.categoryList.FindIndex(p=>p.id==Model.ID); 
+}
+
+
+<h3>Edytuj</h3>
+<h4>Czy na pewno chcesz edytować dane kategorii: @Html.DisplayFor(model =>Model.categoryList[point].shortName)</h4>
+<hr />
+<div class="row">
+    
+    <div class="col-md-4">
+        <form method="post">
+            <!--<input type="hidden" asp-for="EditProduct.id" />
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>-->
+            
+            <div class="form-group">
+                <label asp-for="EditCategory.shortName" class="control-label"></label>
+                <input asp-for="EditCategory.shortName" class="form-control" />
+                <span asp-validation-for="EditCategory.shortName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EditCategory.longName" class="control-label"></label>
+                <input asp-for="EditCategory.longName" class="form-control" />
+                <span asp-validation-for="EditCategory.longName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Zapisz" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,96 @@
+CREATE TABLE [dbo].[Category] (
+    [Id]        INT           IDENTITY (1, 1) NOT NULL,
+    [shortName] NCHAR (10)    NOT NULL,
+    [longName]  NVARCHAR (50) NOT NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC)
+);
+CREATE TABLE [dbo].[Product] (
+    [Id]       INT        IDENTITY (1, 1) NOT NULL,
+    [name]     NCHAR (50) NOT NULL,
+    [price]    MONEY      NOT NULL,
+    [category] NCHAR (50) NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC)
+);
+CREATE TABLE [dbo].[LoginInfo] (
+    [Username] VARCHAR (100) NOT NULL,
+    [Password] VARCHAR (50)  NOT NULL
+);
+
+CREATE PROCEDURE [dbo].[sp_CategoryAdd]
+@shortName nchar (10),
+@longName Varchar (50)
+AS
+INSERT INTO Category (shortName, longName) VALUES (@shortName, @longName)
+
+CREATE PROCEDURE [dbo].[sp_CategoryAdd]
+@shortName nchar (10),
+@longName Varchar (50)
+AS
+INSERT INTO Category (shortName, longName) VALUES (@shortName, @longName)
+
+CREATE PROCEDURE [dbo].[sp_categoryEdit]
+@shortName nchar (10),
+@longName varchar (50),
+@ID int
+AS
+UPDATE Category SET shortName=@shortName, longName=@longName where Id=@ID
+
+CREATE PROCEDURE [dbo].[sp_categoryView]
+AS
+SELECT * FROM Category
+
+CREATE PROCEDURE [dbo].[sp_categoryViewname]
+@ID int
+AS
+SELECT longName FROM Category where Id=@ID
+
+CREATE PROCEDURE [dbo].[sp_productAdd]
+@name VARCHAR (50),
+@price MONEY,
+@category nchar (50)
+AS
+INSERT INTO Product (name, price,category) VALUES (@name, @price,@category)
+
+CREATE PROCEDURE [dbo].[sp_productDelete]
+@ID int
+AS
+Delete from Product where Id=@ID
+
+CREATE PROCEDURE [dbo].[sp_productEdit]
+@name VARCHAR (50),
+@price MONEY,
+@ID int,
+@category varchar(50)
+AS
+UPDATE Product SET name=@name, price=@price, category=@category where Id=@ID
+
+CREATE PROCEDURE [dbo].[sp_productView]
+AS
+SELECT * FROM Product
+
+create PROCEDURE CheckUser  
+(  
+  @username as varchar(50), @password as varchar(50)  
+)  
+AS  
+SELECT * FROM dbo.LoginInfo WHERE Username = @username AND Password = @password
+
+create procedure[dbo].[Register]  
+(  
+  @username varchar(40), @password varchar(40)  
+)  
+as  
+insert into dbo.LoginInfo values(@username, @password)
+
+SET IDENTITY_INSERT [dbo].[Product] ON
+INSERT INTO [dbo].[Product] ([Id], [name], [price], [category]) VALUES (1, N'Pila                                              ', CAST(222.0000 AS Money), NULL)
+INSERT INTO [dbo].[Product] ([Id], [name], [price], [category]) VALUES (2, N'frytunie                                          ', CAST(2312.0000 AS Money), N'artykuly spozywcze                                ')
+INSERT INTO [dbo].[Product] ([Id], [name], [price], [category]) VALUES (3, N'narty                                             ', CAST(780.0000 AS Money), NULL)
+INSERT INTO [dbo].[Product] ([Id], [name], [price], [category]) VALUES (5, N'Pila                                              ', CAST(222.0000 AS Money), NULL)
+INSERT INTO [dbo].[Product] ([Id], [name], [price], [category]) VALUES (6, N'pilka nozna                                       ', CAST(12311.0000 AS Money), N'sportowe swiry                                    ')
+SET IDENTITY_INSERT [dbo].[Product] OFF
+
+SET IDENTITY_INSERT [dbo].[Category] ON
+INSERT INTO [dbo].[Category] ([Id], [shortName], [longName]) VALUES (1, N'sport     ', N'sportowe swiry')
+INSERT INTO [dbo].[Category] ([Id], [shortName], [longName]) VALUES (2, N'jedzenie  ', N'artykuly spozywcze')
+SET IDENTITY_INSERT [dbo].[Category] OFF
